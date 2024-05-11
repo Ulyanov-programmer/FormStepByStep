@@ -1,0 +1,281 @@
+<x-layout
+  title="Step by step form"
+  swiper="true"
+  justValidate="true"
+  noUiSlider="false"
+  stepByStep="true"
+>
+  <push name="styles">
+    <link rel="stylesheet" href="./styles/index.css" />
+  </push>
+  <push name="scripts">
+    <script defer src="./scripts/scripts.js"></script>
+  </push>
+
+  <fill:header></fill:header>
+
+  <form id="main-form" action="#">
+    <help-icon>
+      <img src="./images/gesture_swipe_horizontal_icon_137552.svg" alt="" />
+      <span>Swipe to move the form</span>
+    </help-icon>
+
+    <aside>
+      <ol hidden>
+        <li>
+          <strong>Business structure</strong>
+        </li>
+        <li>Business representative</li>
+        <li>Business details</li>
+        <li>
+          <strong>Bank details</strong>
+        </li>
+        <li>
+          <strong>2 step authentication</strong>
+        </li>
+        <li>
+          <strong>Overview</strong>
+        </li>
+      </ol>
+
+      <!-- Only for swiper-slider -->
+      <ol id="form-steps-pag"></ol>
+    </aside>
+
+    <swiper-slider class="swiper" id="form-steps">
+      <div class="swiper-wrapper">
+        <swiper-slide class="swiper-slide">
+          <fieldset>
+            <legend>Business structure</legend>
+
+            <form-block>
+              <label for="business-address">Business address</label>
+              <select-wrapper>
+                <select required name="business-address" id="business-address">
+                  <option value="" disabled selected>
+                    Registered business address
+                  </option>
+                  <option value="value1">Option 1</option>
+                  <option value="value2">Option 2</option>
+                  <option value="value3">Option 3</option>
+                </select>
+              </select-wrapper>
+            </form-block>
+
+            <form-block>
+              <label for="type">Type</label>
+              <select-wrapper>
+                <select required name="type" id="type">
+                  <option value="" disabled selected>Type of business</option>
+                  <option value="value1">Option 1</option>
+                  <option value="value2">Option 2</option>
+                  <option value="value3">Option 3</option>
+                </select>
+              </select-wrapper>
+            </form-block>
+
+            <form-block>
+              <label for="address-line-1">Address</label>
+              <input
+                type="text"
+                name="address-line-1"
+                placeholder="Address line 1"
+                required
+              />
+              <input
+                type="text"
+                name="address-line-2"
+                placeholder="Address line 2"
+              />
+              <input type="text" name="city" placeholder="City" required />
+              <input
+                type="text"
+                inputmode="numeric"
+                name="zip"
+                placeholder="Zip"
+                required
+              />
+            </form-block>
+
+            <button type="button">Continue</button>
+          </fieldset>
+        </swiper-slide>
+
+        <swiper-slide class="swiper-slide">
+          <fieldset>
+            <form-two-blocks>
+              <label>Name</label>
+              <input
+                type="text"
+                name="first-name"
+                placeholder="First name"
+                required
+              />
+              <input
+                type="text"
+                name="last-name"
+                placeholder="Last name"
+                required
+              />
+            </form-two-blocks>
+
+            <form-block>
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your email"
+                required
+                id="email"
+              />
+            </form-block>
+
+            <form-block>
+              <label for="phone">Phone</label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Your phone"
+                required
+                id="phone"
+              />
+            </form-block>
+
+            <button type="button">Continue</button>
+          </fieldset>
+        </swiper-slide>
+
+        <swiper-slide class="swiper-slide">
+          <fieldset>
+            <form-block>
+              <label for="vat">VAT</label>
+              <input
+                type="text"
+                name="vat"
+                placeholder="VAT number"
+                required
+                id="vat"
+              />
+            </form-block>
+
+            <form-block>
+              <label for="industry">Industry</label>
+              <select-wrapper>
+                <select required name="industry" id="industry">
+                  <option value="" disabled selected>
+                    Please select your industry...
+                  </option>
+                  <option value="value1">Option 1</option>
+                  <option value="value2">Option 2</option>
+                  <option value="value3">Option 3</option>
+                </select>
+              </select-wrapper>
+            </form-block>
+
+            <form-block>
+              <label for="site">Organization website</label>
+              <input
+                type="text"
+                name="site"
+                placeholder="www.example.com"
+                required
+                id="site"
+              />
+            </form-block>
+
+            <button type="button">Continue</button>
+          </fieldset>
+        </swiper-slide>
+
+        <swiper-slide class="swiper-slide">
+          <fieldset>
+            <form-block>
+              <label for="currency">Currency</label>
+              <select-wrapper>
+                <select required name="currency" id="currency">
+                  <option value="" disabled selected>
+                    Select your currency...
+                  </option>
+                  <option value="value1">Option 1</option>
+                  <option value="value2">Option 2</option>
+                  <option value="value3">Option 3</option>
+                </select>
+              </select-wrapper>
+            </form-block>
+
+            <form-block>
+              <label for="bank-country">Country of bank account</label>
+              <select-wrapper>
+                <select required name="bank-country" id="bank-country">
+                  <option value="" disabled selected>Country</option>
+                  <option value="value1">Option 1</option>
+                  <option value="value2">Option 2</option>
+                  <option value="value3">Option 3</option>
+                </select>
+              </select-wrapper>
+            </form-block>
+
+            <form-block>
+              <label for="iban">IBAN</label>
+              <input
+                type="text"
+                name="iban"
+                placeholder="Enter your IBAN"
+                required
+                id="iban"
+              />
+              <input
+                type="text"
+                name="iban-confirm"
+                placeholder="Confirm IBAN"
+                required
+                id="iban-confirm"
+              />
+            </form-block>
+
+            <button type="button">Continue</button>
+          </fieldset>
+        </swiper-slide>
+
+        <swiper-slide class="swiper-slide">
+          <fieldset>
+            <form-block>
+              <strong>Keep your account secure</strong>
+              <a id="sms" href="#">Use SMS</a>
+              <a id="app" href="#">Use an authenticator app</a>
+            </form-block>
+
+            <button type="button">Continue</button>
+          </fieldset>
+        </swiper-slide>
+
+        <swiper-slide class="swiper-slide">
+          <fieldset>
+            <form-block>
+              <strong>Business details</strong>
+
+              <input
+                type="file"
+                id="details-files"
+                name="details-files"
+                multiple
+                accept=".jpg,.jpeg,.png"
+              />
+              <label for="details-files">Add files...</label>
+            </form-block>
+
+            <form-block>
+              <ul id="added-files-list"></ul>
+            </form-block>
+
+            <button type="submit">Submit</button>
+          </fieldset>
+        </swiper-slide>
+      </div>
+    </swiper-slider>
+  </form>
+
+  <dialog id="congratulatory-window">
+    <p>Hooray! All stages were completed successfully.</p>
+  </dialog>
+</x-layout>
