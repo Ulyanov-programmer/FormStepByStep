@@ -1,0 +1,399 @@
+body > header {
+  padding: 35px 25px;
+  padding-inline: var(--content-inline-padding);
+  border-bottom: 1px solid #eceeeb
+}
+body > header a:focus-visible::before {
+  animation: decor-icon-move 500ms ease-out 1 forwards
+}
+@media (hover: hover) {
+  body > header a:hover::before {
+    animation: decor-icon-move 500ms ease-out 1 forwards
+  }
+}
+body > header a {
+  display: inline-flex;
+  gap: 15px;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-weight: 500;
+  letter-spacing: 0.04em
+}
+body > header a::before {
+  content: url('../images/return_back.svg')
+}
+body > header a small {
+  padding: 1px 6px 1px 5px;
+  font-size: 12px;
+  color: #6f6fff;
+  background: rgb(85 82 217 / 8%);
+  border-radius: 3px
+}
+@keyframes decor-icon-move {
+  50% {
+    translate: -15%
+  }
+  100% {
+    translate: 0%
+  }
+}
+@media (max-width: 426px) {
+  body > header {
+    padding: 15px
+  }
+}
+body main > form {
+  display: grid;
+  gap: clamp(25px, calc(60 * 100vw / 1440), 70px);
+  grid-template-columns: auto 1fr;
+  padding-block: 45px 25px;
+  padding-inline: var(--content-inline-padding)
+}
+body main > form aside ol {
+  counter-reset: form-counter;
+  position: relative;
+  display: grid;
+  gap: 15px;
+  line-height: 1.2
+}
+body main > form aside ol::before {
+  position: absolute;
+  z-index: -1;
+  inset: -1.5% auto auto -3px;
+  content: '';
+  width: 31px;
+  height: 103%;
+  background: rgb(217 217 217 / 44%);
+  border-radius: 25px
+}
+body main > form aside ol > *:has(strong) {
+  padding-block: 10px
+}
+body main > form aside ol > *:has(strong):last-child {
+  padding-bottom: 0
+}
+body main > form aside ol > *:has(strong):first-child {
+  padding-top: 0
+}
+body main > form aside ol[hidden] {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%)
+}
+body main > form aside ol li {
+  align-items: center
+}
+body main > form aside ol li.current {
+  cursor: auto
+}
+body main > form aside ol li.current::before {
+  background: #4a3aff
+}
+body main > form aside ol li.current:has(strong)::before {
+  content: counter(form-counter);
+  color: #fff
+}
+body main > form aside ol li.current ~ li {
+  cursor: auto
+}
+body main > form aside ol li.current ~ li::before {
+  background: #fff
+}
+body main > form aside ol li.current ~ li:has(strong)::before {
+  content: counter(form-counter)
+}
+body main > form aside ol li:has(strong) {
+  cursor: pointer;
+  counter-increment: form-counter;
+  display: grid;
+  grid-template: 'before title' auto 'unorderedList unorderedList' auto/auto 1fr;
+  gap: 0 20px
+}
+body main > form aside ol li:has(strong)::before {
+  content: url('../images/complete_list_icon.svg');
+  display: inline-block;
+  grid-area: before;
+  width: 25px;
+  padding: 5px 0;
+  font-size: 14px;
+  text-align: center;
+  background: #4ade80;
+  border-radius: 50%;
+  transition: all 0.3s ease
+}
+body main > form aside ol li:not(:has(strong)) {
+  cursor: pointer;
+  display: flex;
+  gap: 35px;
+  color: #737373
+}
+body main > form aside ol li:not(:has(strong))::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  min-width: 10px;
+  height: 10px;
+  margin-inline: 7px;
+  background: #4ade80;
+  border-radius: 50%;
+  transition: all 0.3s ease
+}
+@media (min-width: 426px) and (max-width: 769px) {
+  body main > form aside ol li:not(:has(strong)) {
+    gap: 20px
+  }
+}
+body main > form aside ol li strong {
+  font-size: 1rem;
+  font-weight: 500
+}
+@media (min-width: 600.02px) {
+  body main > form aside {
+    position: sticky;
+    top: 30px;
+    height: -moz-fit-content;
+    height: fit-content
+  }
+}
+body main > form #form-steps {
+  width: 100%
+}
+body main > form #form-steps fieldset {
+  max-width: 450px;
+  padding-bottom: 20px;
+  padding-inline: 25px
+}
+body main > form #form-steps fieldset > * {
+  display: block
+}
+body main > form #form-steps fieldset legend {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%)
+}
+body main > form #form-steps fieldset form-block {
+  display: grid;
+  gap: 15px;
+  margin-block: 30px
+}
+body main > form #form-steps fieldset form-block > * {
+  width: 100%
+}
+body main > form #form-steps fieldset form-block:first-of-type {
+  margin-top: 0
+}
+body main > form #form-steps fieldset form-block select-wrapper {
+  position: relative;
+  display: grid
+}
+body main > form #form-steps fieldset form-block select-wrapper::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0.85em 15px auto auto;
+  content: url('../images/simple_arrow_below.svg');
+  translate: 0 -50%;
+  transition: all 0.3s ease
+}
+@media (hover: hover) {
+  body main > form #form-steps fieldset form-block select-wrapper:has(select:hover)::after {
+    rotate: 45deg
+  }
+}
+body main > form #form-steps fieldset form-two-blocks {
+  display: grid;
+  gap: 15px 8px;
+  grid-template-columns: 1fr 1fr;
+  margin-block: 30px
+}
+body main > form #form-steps fieldset form-two-blocks > * {
+  width: 100%
+}
+body main > form #form-steps fieldset form-two-blocks > *:first-child {
+  grid-column: span 2
+}
+body main > form #form-steps fieldset form-two-blocks:first-of-type {
+  margin-top: 0
+}
+body main > form #form-steps fieldset label,
+body main > form #form-steps fieldset strong {
+  pointer-events: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: #404d61
+}
+body main > form #form-steps fieldset input[type='file'] + label {
+  pointer-events: all;
+  padding: 12px 16px;
+  border: 1px solid #e1e3e6;
+  border-radius: 8px
+}
+body main > form #form-steps fieldset input,
+body main > form #form-steps fieldset select,
+body main > form #form-steps fieldset a {
+  padding: 5px 15px;
+  border: 1px solid #e1e3e6;
+  border-radius: 8px
+}
+body main > form #form-steps fieldset input.invalid,
+body main > form #form-steps fieldset select.invalid,
+body main > form #form-steps fieldset a.invalid {
+  background: rgb(239 68 68 / 8%);
+  border-color: #ef4444
+}
+body main > form #form-steps fieldset input.invalid::-moz-placeholder,
+body main > form #form-steps fieldset select.invalid::-moz-placeholder,
+body main > form #form-steps fieldset a.invalid::-moz-placeholder {
+  color: #ef4444
+}
+body main > form #form-steps fieldset input.invalid::placeholder,
+body main > form #form-steps fieldset select.invalid::placeholder,
+body main > form #form-steps fieldset a.invalid::placeholder {
+  color: #ef4444
+}
+body main > form #form-steps fieldset input.invalid + .just-validate-error-label,
+body main > form #form-steps fieldset select.invalid + .just-validate-error-label,
+body main > form #form-steps fieldset a.invalid + .just-validate-error-label {
+  color: #ef4444
+}
+body main > form #form-steps fieldset a:focus-visible {
+  scale: 1.03
+}
+@media (hover: hover) {
+  body main > form #form-steps fieldset a:hover {
+    scale: 1.03
+  }
+}
+body main > form #form-steps fieldset a {
+  padding: 12px 16px;
+  box-shadow: 0 1px 25px 0 rgb(0 0 0 / 10%);
+  transition: scale 0.3s ease
+}
+body main > form #form-steps fieldset input[type='file'].invalid + label {
+  color: #ef4444;
+  background: rgb(239 68 68 / 8%);
+  border-color: #ef4444
+}
+body main > form #form-steps fieldset select:focus-visible {
+  background: #eaeaea
+}
+body main > form #form-steps fieldset select:invalid {
+  color: #757d8a
+}
+body main > form #form-steps fieldset select option {
+  color: #000
+}
+body main > form #form-steps fieldset select option[disabled] {
+  display: none
+}
+body main > form #form-steps fieldset > button:is([type='button'], [type='submit']):last-of-type {
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+  background: #4a3aff;
+  border-radius: 6px
+}
+body main > form #form-steps fieldset > button:is([type='button'], [type='submit']):last-of-type::after {
+  content: url('../images/small_icon_right.svg');
+  display: inline-block;
+  margin-left: 7px;
+  transition: all 0.3s ease
+}
+@keyframes to-right {
+  50% {
+    translate: 30%
+  }
+  0% {
+    translate: 0%
+  }
+}
+body main > form #form-steps fieldset > button:is([type='button'], [type='submit']):last-of-type:hover::after,
+body main > form #form-steps fieldset > button:is([type='button'], [type='submit']):last-of-type:focus-visible::after {
+  animation: to-right 500ms ease-out 1 forwards
+}
+@media (min-width: 426px) and (max-width: 769px) {
+  body main > form #form-steps fieldset {
+    max-width: 100%
+  }
+}
+body main > form #form-steps #added-files-list li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-block: 5px
+}
+body main > form #form-steps #added-files-list li:before {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  aspect-ratio: 1/1;
+  background: #4a3aff;
+  border-radius: 50%;
+  content: ''
+}
+body main > form help-icon {
+  grid-column: span 2
+}
+@media (min-width: 600.02px) {
+  body main > form help-icon {
+    display: none
+  }
+}
+@media (max-width: 600px) {
+  body main > form {
+    grid-template-rows: auto auto;
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    grid-auto-columns: calc(100% + 35px);
+    grid-auto-flow: column;
+    /* size of the first block in this container */
+    grid-template-columns: 200px;
+    /* size of a block in this container */
+    gap: 35px
+  }
+  body main > form > *:not(help-icon) {
+    scroll-snap-align: center
+  }
+  body main > form swiper-slider {
+    touch-action: auto !important
+  }
+}
+body main #congratulatory-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  display: grid;
+  place-items: center;
+  place-content: center
+}
+body main #congratulatory-window:not([open]) {
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0
+}
+body main #congratulatory-window[open] {
+  pointer-events: all;
+  overflow: auto;
+  opacity: 1
+}
+body main #congratulatory-window p {
+  background: white;
+  padding: 50px;
+  border-radius: 5px
+}
+body main .just-validate-error-label {
+  font-size: 0.875rem;
+  padding-top: 5px
+}
