@@ -27,6 +27,7 @@
     <!-- /-/ Other stylesheets and scripts for this page -->
     <link rel="stylesheet" href="./styles/index.css">
     <script defer="" src="./scripts/scripts.js"></script>
+    <script defer="" src="./scripts/index.js"></script>
   </head>
   <body>
     <header>
@@ -92,10 +93,12 @@
                 </form-block>
                 <form-block>
                   <label for="address-line-1">Address</label>
+                  <mark data-for="address-line-1"> Write your address </mark>
                   <input type="text" name="address-line-1" placeholder="Address line 1" required="">
                   <input type="text" name="address-line-2" placeholder="Address line 2">
                   <input type="text" name="city" placeholder="City" required="">
-                  <input type="text" inputmode="numeric" name="zip" placeholder="Zip" required="">
+                  <mark data-for="zip"> Invalid ZIP code </mark>
+                  <input type="text" inputmode="numeric" name="zip" placeholder="Zip" required="" pattern="^[0-9]{10}">
                 </form-block>
                 <button type="button">Continue</button>
               </fieldset>
@@ -109,11 +112,11 @@
                 </form-two-blocks>
                 <form-block>
                   <label for="email">Email</label>
-                  <input type="email" name="email" placeholder="Your email" required="" id="email">
+                  <input type="email" name="email" inputmode="email" placeholder="Your email" required="" id="email">
                 </form-block>
                 <form-block>
                   <label for="phone">Phone</label>
-                  <input type="tel" name="phone" placeholder="Your phone" required="" id="phone">
+                  <input type="tel" name="phone" inputmode="numeric" placeholder="Your phone" required="" id="phone" pattern="[0-9]{11,}">
                 </form-block>
                 <button type="button">Continue</button>
               </fieldset>
@@ -192,7 +195,10 @@
               <fieldset>
                 <form-block>
                   <strong>Business details</strong>
-                  <input type="file" id="details-files" name="details-files" multiple="" accept=".jpg,.jpeg,.png">
+                  <mark data-for="details-files">
+                    The number of files should be from 1 to 10, in image format and no more than 10 megabytes.
+                  </mark>
+                  <input type="file" id="details-files" name="details-files" multiple="" accept=".jpg,.jpeg,.png" data-max-files="10" data-min-files="1">
                   <label for="details-files">Add files...</label>
                 </form-block>
                 <form-block>

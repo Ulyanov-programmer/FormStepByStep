@@ -1,17 +1,74 @@
 import Swiper from '../../assets/swiper/swiper-bundle.min.mjs'
 import StepByStepBlock from './stepByStepBlock.src.js'
-import { validatorOfForm } from '../../assets/justValidate/index.js'
 
-const COUNT_OF_BLOCKS = 6
 const listItems = document.querySelectorAll('aside ol[hidden] li')
 const congratulatoryWindow = document.querySelector('#congratulatory-window')
+const specificItems = [
+  {
+    name: 'vat',
+    element: document.querySelector('[name="vat"]'),
+    function: function () {
+      let unmaskedvalue = this.element.inputmask.unmaskedvalue()
+      let isValueString = /^[0-9a-zA-Z ]{8,}/.test(unmaskedvalue)
+
+      return isValueString
+    }
+  },
+  {
+    name: 'iban',
+    element: document.querySelector('[name="iban"]'),
+    function: function () {
+      let unmaskedvalue = this.element.inputmask.unmaskedvalue()
+
+      return unmaskedvalue.length >= 34
+    }
+  },
+  {
+    name: 'iban-confirm',
+    element: document.querySelector('[name="iban-confirm"]'),
+    function: function () {
+      let value = this.element.inputmask.unmaskedvalue()
+      let valueOfConfirm = document.querySelector('[name="iban"]')
+        .inputmask.unmaskedvalue()
+
+      return value == valueOfConfirm
+    }
+  },
+  {
+    name: 'details-files',
+    element: document.querySelector('[name="details-files"]'),
+    function: function () {
+      if (!this.element.files.length) {
+        return false
+      }
+      let filesArray = Array.from(this.element.files)
+
+      let minFiles = filesArray.length > 0
+      let maxFiles = filesArray.length <= 10
+
+      let isNotExtensions = filesArray.find(file =>
+        !this.element.accept.includes(file.type.replace('image/', ''))
+      )
+      let isNotCorrectSize = filesArray.find(file =>
+        // in bytes, 1 000 = ~1kb
+        // 10 Megabytes
+        file.size < 1000 || file.size > 10000000
+      )
+
+      return minFiles && maxFiles && !isNotCorrectSize && !isNotExtensions
+    }
+  },
+]
 let formBlocks = []
 
-for (let i = 0; i < COUNT_OF_BLOCKS; i++) {
-  formBlocks[i] = document.querySelectorAll(
-    `swiper-slide:nth-child(${i + 1}) :is(input, select)`
+for (let i = 1; i <= listItems.length; i++) {
+  formBlocks.push(
+    document.querySelectorAll(
+      `swiper-slide:nth-child(${i}) :is(input, select)`
+    )
   )
 }
+
 
 new StepByStepBlock({
   swiperInstance: new Swiper('#form-steps', {
@@ -48,20 +105,55 @@ new StepByStepBlock({
     2: () => validateFields(formBlocks[2]),
     3: () => validateFields(formBlocks[3]),
     4: () => validateFields(formBlocks[4]),
-    5: async () => {
-      if (await validateFields(formBlocks[5])) {
+    5: () => {
+      if (validateFields(formBlocks[5])) {
         congratulatoryWindow.showModal()
       }
     },
   },
 })
 
-async function validateFields(fields) {
+function validateFields(fields) {
+  if (fields instanceof Event) {
+    fields = [fields.target]
+  }
+
   for (let formElement of fields) {
-    if (await validatorOfForm.revalidateField(`[name="${formElement.name}"]`))
+    let inSpecificItems = specificItems.find(item => item.name == formElement.name)
+
+    if (inSpecificItems) {
+      var isValid = inSpecificItems.function()
+    }
+    else {
+      var isValid = formElement.validity.valid
+    }
+
+    if (isValid) {
+      formElement.classList.remove('invalid')
+
+      document.querySelector(`[data-for=${formElement.name}]`)
+        ?.classList?.remove('visible')
+
+      formElement.removeEventListener('input', validateFields)
+      formElement.removeEventListener('change', validateFields)
+
       continue
-    else
+    }
+    else {
+      formElement.classList.add('invalid')
+
+      document.querySelector(`mark[data-for=${formElement.name}]`)
+        ?.classList?.add('visible')
+
+      if (formElement.tagName == 'INPUT') {
+        formElement.addEventListener('input', validateFields)
+      }
+      else if (formElement.tagName == 'SELECT') {
+        formElement.addEventListener('change', validateFields)
+      }
+
       return false
+    }
   }
 
   return true

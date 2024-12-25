@@ -10,6 +10,7 @@
   </push>
   <push name="scripts">
     <script defer src="./scripts/scripts.js"></script>
+    <script defer src="./scripts/index.js"></script>
   </push>
 
   <fill:header></fill:header>
@@ -76,6 +77,8 @@
 
             <form-block>
               <label for="address-line-1">Address</label>
+
+              <mark data-for="address-line-1"> Write your address </mark>
               <input
                 type="text"
                 name="address-line-1"
@@ -88,12 +91,15 @@
                 placeholder="Address line 2"
               />
               <input type="text" name="city" placeholder="City" required />
+
+              <mark data-for="zip"> Invalid ZIP code </mark>
               <input
                 type="text"
                 inputmode="numeric"
                 name="zip"
                 placeholder="Zip"
                 required
+                pattern="^[0-9]{10}"
               />
             </form-block>
 
@@ -105,6 +111,7 @@
           <fieldset>
             <form-two-blocks>
               <label>Name</label>
+
               <input
                 type="text"
                 name="first-name"
@@ -124,6 +131,7 @@
               <input
                 type="email"
                 name="email"
+                inputmode="email"
                 placeholder="Your email"
                 required
                 id="email"
@@ -135,9 +143,11 @@
               <input
                 type="tel"
                 name="phone"
+                inputmode="numeric"
                 placeholder="Your phone"
                 required
                 id="phone"
+                pattern="[0-9]{11,}"
               />
             </form-block>
 
@@ -191,6 +201,7 @@
           <fieldset>
             <form-block>
               <label for="currency">Currency</label>
+
               <select-wrapper>
                 <select required name="currency" id="currency">
                   <option value="" disabled selected>
@@ -205,6 +216,7 @@
 
             <form-block>
               <label for="bank-country">Country of bank account</label>
+
               <select-wrapper>
                 <select required name="bank-country" id="bank-country">
                   <option value="" disabled selected>Country</option>
@@ -254,12 +266,19 @@
             <form-block>
               <strong>Business details</strong>
 
+              <mark data-for="details-files">
+                The number of files should be from 1 to 10, in image format and
+                no more than 10 megabytes.
+              </mark>
+
               <input
                 type="file"
                 id="details-files"
                 name="details-files"
                 multiple
                 accept=".jpg,.jpeg,.png"
+                data-max-files="10"
+                data-min-files="1"
               />
               <label for="details-files">Add files...</label>
             </form-block>
